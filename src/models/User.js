@@ -6,6 +6,12 @@ const usuarioSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
@@ -20,9 +26,9 @@ const usuarioSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'usuario'],
     default: 'usuario',
-  }
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

@@ -1,45 +1,57 @@
-const { crearUsuario, obtenerUsuarios,loginUsuario } = require('../services/userServices.js');
+const {
+  crearUsuario,
+  loginUsuario,
+  obtenerUsuarios,
+} = require('../services/userServices');
 
-// POST /api/usuarios
-async function crearUsuarioController(req, res) {
-  try {
-    const usuario = await crearUsuario(req.body);
-    res.status(201).json(usuario);
-  } catch (error) {
-    res.status(400).json({ mensaje: error.message });
-  }
-}
+const {
+  createUserValidations,
+  validateResult
+} = require('../validations/userValidations');
+const {
+  sendEmail
+} = require('../services/mailer');
 
-// GET /api/usuarios
-async function obtenerUsuariosController(req, res) {
-  try {
-    const usuarios = await obtenerUsuarios();
-    res.status(200).json(usuarios);
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al obtener los usuarios' });
-  }
-}
 
-const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const usuario = await loginUsuario(email, password);
-    res.status(200).json({
-      mensaje: 'Login exitoso',
-      usuario: {
-        id: usuario._id,
-        nombre: usuario.nombre,
-        email: usuario.email,
-        rol: usuario.rol
+const userController = {
+  createUser: [
+    ...createUserValidations,
+    validateResult,
+    async (req, res) => {
+      try {
+        const contenido = 'Me complace anunciarte que has sido registrado correctamente en la app';
+        const { nombre, email } = req.body;
+        console.log(email)
+        const result = await crearUsuario(req.body);
+        sendEmail(nombre,email,contenido)
+        res.status(201).json(result);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
       }
-    });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+    },
+  ],
+
+  loginUser: [
+    async (req, res) => {
+      try {
+        const { email, password } = req.body;
+        const result = await loginUsuario(email,password);
+        res.status(200).json(result);
+      } catch (error) {
+        res.status(401).json({ message: error.message });
+      }
+    },
+  ],
+  getUsuarios: [
+    async (req, res) => {
+      try {
+        const result = await obtenerUsuarios();
+        res.status(200).json(result);
+      } catch (error) {
+        res.status(401).json({ message: error.message });
+      }
+    }
+  ]
 };
 
-module.exports = {
-  crearUsuarioController,
-  obtenerUsuariosController,
-  login
-};
+module.exports = userController;

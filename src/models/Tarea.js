@@ -5,19 +5,22 @@ const tareaSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    minlength: 3,
+    maxlength: 100
   },
   descripcion: {
     type: String,
-    trim: true,
+    maxlength: 500
   },
   estado: {
     type: String,
-    enum: ['pendiente', 'en progreso', 'completada'],
+    enum: ['pendiente', 'en-progreso', 'completado'],
     default: 'pendiente',
   },
   fecha: {
     type: Date,
     required: true,
+    default: Date.now
   },
   usuarioId: {
     type: mongoose.Schema.Types.ObjectId,
