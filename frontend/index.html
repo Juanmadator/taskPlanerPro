@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task Planer</title>
+	<link rel="icon" type="image/x-icon" href="./icon.ico">
+	<link rel="stylesheet" href="./style/style.css">
+	<script defer type="module" src="./scripts/index.js"></script>
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#" class="active">Tareas</a></li>
+				<li><a href="./pages/create.html">Crear</a></li>
+				<li><a href="./pages/eventos.html">Eventos</a></li>
+				<li><a href="./pages/images.html">Imagenes</a></li>
+
+				<div id="clima">
+					<h4 id="ciudad" class="spinner"></h4>
+				</div>
+			</ul>
+
+		</nav>
+	</header>
+
+	<form action="">
+		<label for="filter" class="filtrar">Filtrar tareas: </label>
+		<select name="filter" id="filter">
+			<option value="todas">Todas</option>
+			<option value="pendiente">Pendiente</option>
+			<option value="en-progreso">En Progreso</option>
+			<option value="completado">Completado</option>
+		</select>
+	</form>
+
+	<section class="tasks">
+	</section>
+
+	<span id="taskDeleted">Tarea eliminada</span>
+	<span id="taskUpdated">Tarea actualizada</span>
+	<span id="taskExists">La tarea ya existe</span>
+	<span id="errorCreate">No es posible crear la tarea</span>
+	<span id="errorEdit">No es posible editar la tarea</span>
+	<span id="errorDelete">No es posible eliminar la tarea</span>
+
+	<footer>
+		<p>Copyright @Juan Manuel Adame 2025</p>
+	</footer>
+	<div class="spinner" id="spinner-tareas"></div>
+
+</body>
+
+
+</html>

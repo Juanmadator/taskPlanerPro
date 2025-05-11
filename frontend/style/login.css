@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #282c34;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.164);
+
+  }
+
+  select {
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    border: 2px solid #738496;
+    background-color: #333c43d5;
+  }
+
+  option {
+    border: 2px solid #738496;
+  }
+
+  .form-group input:focus {
+    border: 2px solid #738496;
+
+    outline: none;
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 0.75rem;
+    padding: 10px;
+    border-radius: 8px;
+    outline: none;
+    border: 2px solid #738496;
+    background-color: #333c43d5;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+
+    & a{
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+
+  .login-button:hover {
+    background-color: #4c6475d5;
+  }
+
+  #mensaje{
+    display: none;
+    width: 100%;
+    margin :0 auto;
+    place-self: center;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    padding: 20px;
+    background-color: green;
+    color: black;
+  }
+
+  @media (max-width: 480px) {
+    .login-container {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  }
+  

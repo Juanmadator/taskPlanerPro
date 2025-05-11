@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task Planer</title>
+	<link rel="icon" type="image/x-icon" href="../icon.ico">
+
+	<link rel="stylesheet" href="../style/style.css">
+	<script defer type="module" src="../scripts/index.js"></script>
+	<script defer type="module" src="../scripts/imagenes.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="../index.html">Tareas</a></li>
+				<li><a href="./create.html">Crear</a></li>
+				<li><a href="./eventos.html">Eventos</a></li>
+				<li><a href="#" class="active">Imagenes</a></li>
+				<div id="clima">
+					<h4 id="ciudad" class="spinner"></h4>
+				</div>
+			</ul>
+		</nav>
+	</header>
+
+	<form id="upload-form" enctype="multipart/form-data">
+		<input type="file" name="image" id="image" />
+		<button class="btn" type="submit">Subir Imagen</button>
+	</form>
+
+	<div class="imagenes">
+
+	</div>
+
+	<span id="taskCreated">Tarea creada</span>
+	<span id="taskDeleted">Tarea eliminada</span>
+	<span id="taskUpdated">Tarea actualizada</span>
+	<span id="taskExists">La tarea ya existe</span>
+	<span id="errorCreate">No es posible crear la tarea</span>
+	<span id="errorEdit">No es posible editar la tarea</span>
+	<span id="errorDelete">No es posible eliminar la tarea</span>
+	<span id="imageUploaded">Imagen subida</span>
+	<span id="imageError">No se ha podido subir la imagen</span>
+
+	<footer>
+		<p>Copyright @Juan Manuel Adame 2025</p>
+	</footer>
+</body>
+
+</html>
