@@ -7,20 +7,30 @@ const { verificarToken } = require("../middlewares/authMiddleware.js");
 
 const uploadDir = path.join(__dirname, "../../uploads");
 
-// Configuración de Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, uploadDir); // Carpeta donde se guardarán las imágenes
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, `${uniqueSuffix}-${file.originalname}`); // Nombre único para cada archivo
+    cb(null, `${uniqueSuffix}-${file.originalname}`);
   },
 });
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image/")) {
+    cb(null, true); 
+  } else {
+    cb(new Error("El archivo no es una imagen válida"), false); 
+  }
+};
 
-// Ruta para subir una imagen
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }, 
+});
+
 router.post("/upload", verificarToken, upload.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No se ha subido ninguna imagen" });
@@ -32,7 +42,6 @@ router.post("/upload", verificarToken, upload.single("image"), (req, res) => {
   });
 });
 
-// Ruta para obtener todas las imágenes
 router.get("/", (req, res) => {
   fs.readdir(uploadDir, (err, files) => {
     if (err) {
@@ -44,7 +53,6 @@ router.get("/", (req, res) => {
   });
 });
 
-// Ruta para eliminar una imagen
 router.delete("/:filename", verificarToken, (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(uploadDir, filename);

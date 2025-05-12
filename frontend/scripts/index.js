@@ -23,10 +23,12 @@ window.addEventListener("load", () => {
     let { rol } = JSON.parse(sessionStorage.getItem("user"));
     if (container && rol == 'admin') {
     loadTaskFromDatabase();
+    } else if (container) {
+      loadAllTasks();
       
     }
   }
-    loadAllTasks();
+
 
   let tasks = document.querySelectorAll(".tasks__task");
   let taskTitle = document.getElementById("title");

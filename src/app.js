@@ -3,6 +3,7 @@ const path = require("path");
 const usuarioRoutes = require('./routes/userRoutes.js');
 const tareaRoutes = require('./routes/tareaRoutes.js');
 const imageRoutes = require("./routes/imageRoutes.js");
+const eventosRoutes = require("./routes/eventoRoutes.js");
 const errorHandler = require('./middlewares/errorMiddleware');
 const notFoundHandler = require('./middlewares/notFoundHandler');
 const cors = require('cors');
@@ -29,6 +30,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/tareas', tareaRoutes);
 app.use("/api/images", imageRoutes);
+app.use("/api/eventos", eventosRoutes);
 
 app.use(notFoundHandler);
 

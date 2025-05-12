@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showNotification("Imagen insertada",true)
       
     } catch (error) {
+
       setTimeout(() => {
         showNotification("Error al insertar imagen",false)
      },1000)

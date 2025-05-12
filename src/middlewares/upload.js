@@ -2,26 +2,25 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Carpeta donde se guardarán los archivos
+    cb(null, "uploads/"); 
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Nombre único para cada archivo
+    cb(null, `${Date.now()}-${file.originalname}`); 
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  // Validar que el archivo sea una imagen
   if (file.mimetype.startsWith("image/")) {
-    cb(null, true); // Aceptar el archivo
+    cb(null, true); 
   } else {
-    cb(new Error("El archivo no es una imagen válida"), false); // Rechazar el archivo
+    cb(new Error("El archivo no es una imagen válida"), false); 
   }
 };
 
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Limitar el tamaño del archivo a 5 MB
+  limits: { fileSize: 5 * 1024 * 1024 }, 
 });
 
 module.exports = upload;

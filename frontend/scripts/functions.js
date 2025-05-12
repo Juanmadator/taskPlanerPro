@@ -2,7 +2,7 @@ const socket = new WebSocket("ws://localhost:3000");
 
 import { getFormInputs, verifytaskTitle, showMessage } from "./index.js";
 
-//funcion para actualizar la tarea (basada en el titulo)
+//funcion para actualizar una tarea
 export const updateTask = async (event) => {
   event.preventDefault();
   const updatedTask = {
@@ -16,16 +16,15 @@ export const updateTask = async (event) => {
   const token = sessionStorage.getItem("token");
   const { taskId } = JSON.parse(localStorage.getItem("taskToEdit"));
   try {
-    // Realizar la solicitud PUT para actualizar la tarea
     const response = await fetch(
       `http://localhost:3000/api/tareas/update/${taskId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Enviar el token en los encabezados
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(updatedTask), // Enviar el cuerpo con los nuevos valores
+        body: JSON.stringify(updatedTask),
       }
     );
 
@@ -77,12 +76,8 @@ export const deleteTask = async (idTarea) => {
 //funcion para crear la tarea
 export const createTask = async (event) => {
   event.preventDefault();
-
   const { title, state, description, dateEnd } = getFormInputs();
-
-  let exists = verifytaskTitle(title.value); // esta función debería verificar si el título ya existe en localStorage
   let added = false;
-  if (!exists) {
     const validStates = ["completado", "en-progreso", "pendiente"];
     const isValidState = validStates.includes(state.value.toLowerCase());
 
@@ -129,7 +124,6 @@ export const createTask = async (event) => {
       showMessage("taskCreated");
       clearForm();
     }
-  }
 };
 
 //funcion para cargar en el dom los elementos dinamicamente
